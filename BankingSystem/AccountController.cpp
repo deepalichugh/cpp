@@ -1,8 +1,8 @@
 #include "AccountView.hpp"
+#include "Bank.hpp"
 
 namespace AccountController {
     void run() {
-        std::unordered_map<int, Account> accounts;
         int choice;
 
         while (true) {
@@ -13,28 +13,28 @@ namespace AccountController {
             switch (choice) {
                 case 1: {
                     std::string name;
-                    std::cout << "Enter account holder name: ";
-                    std::cin >> name;
+                    int accountNumber;
+                    name = AccountView::getAccountHolderName();
                     Account acc(name);
-                    accounts[acc.getAccountNumber()] = acc;
-                    std::cout << "Your Account number is: " << acc.getAccountNumber() << std::endl;
+                    accountNumber = acc.getAccountNumber();
+                    accounts[accountNumber] = acc;
+                    AccountView::displayAccountNumber(accountNumber);
                     break;
                 }
 
                 case 2: {
                     int accountNumber;
                     double amount;
-                    std::cout << "Enter your account number: ";
-                    accountNumber = AccountView::getAccountDetails(accounts);
+                    accountNumber = AccountView::getAccountDetails(accounts, "Enter your account number: ");
                     amount = AccountView::getAmount();
+                    Bank::
                     accounts.at(accountNumber).deposit(amount);
                     break;
                 }
 
                 case 3: {
                     int accountNo;
-                    std::cout << "Enter your account number: ";
-                    accountNo = AccountView::getAccountDetails(accounts);
+                    accountNo = AccountView::getAccountDetails(accounts, "Enter your account number: ");
                     double amount;
                     amount = AccountView::getAmount();
                     accounts.at(accountNo).withdraw(amount);
@@ -44,10 +44,9 @@ namespace AccountController {
                 case 4: {
                     int accountNo;
                     double accBalance;
-                    std::cout << "Enter your account number: ";
-                    accountNo = AccountView::getAccountDetails(accounts);
+                    accountNo = AccountView::getAccountDetails(accounts, "Enter your account number: ");
                     accBalance = accounts.at(accountNo).getBalance();
-                    std::cout << "Your account balance is: " << accBalance << std::endl;
+                    AccountView::printAccountBalance(accBalance);
                     break;
                 }
 
@@ -56,15 +55,12 @@ namespace AccountController {
                     int receiverAccountNo;
                     double amount;
 
-                    std::cout << "Enter your account number: ";
-                    senderAccountNo = AccountView::getAccountDetails(accounts);
-
-                    std::cout << "Enter the account number to transfer to: ";
-                    receiverAccountNo = AccountView::getAccountDetails(accounts);
+                    senderAccountNo = AccountView::getAccountDetails(accounts, "Enter your account number: ");
+                    receiverAccountNo = AccountView::getAccountDetails(accounts, "Enter the account number to transfer to: ");
 
                     amount = AccountView::getAmount();
                     if (accounts.at(senderAccountNo).getBalance() < amount) {
-                        std::cout << "You do not have sufficient balance to transfer!";
+                        AccountView::printError("You do not have sufficient balance to transfer!");
                         break;
                     }
                     accounts.at(senderAccountNo).withdraw(amount);

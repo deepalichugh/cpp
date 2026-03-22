@@ -1,9 +1,10 @@
 #include "AccountView.hpp"
 
 namespace AccountView {
-    int getAccountDetails(std::unordered_map<int, Account>& accounts) {
+    int getAccountDetails(std::unordered_map<int, Account>& accounts, const std::string& message) {
         int accountNumber;
         std::cin >> accountNumber;
+        std::cout << message;
         
         while (accounts.find(accountNumber) == accounts.end()) {
             std::cout << "This account number doesn't exist. Try again!\nEnter account number:";
@@ -11,6 +12,10 @@ namespace AccountView {
         }
 
         return accountNumber;
+    }
+
+    void printError(const std::string& message) {
+        std::cout << message << std::endl;
     }
 
     double getAmount() {
@@ -26,6 +31,25 @@ namespace AccountView {
         return amount;
     }
 
+    std::string getAccountHolderName() {
+        std::string name;
+        std::cout << "Enter account holder name: ";
+        std::cin >> name;
+
+        return name;
+    }
+
+    void printAccountBalance(double balance) {
+        std::cout << "Your account balance is: " << balance << std::endl;
+    }
+
+    int getUserChoice() {
+        int choice;
+        std::cin >> choice;
+
+        return choice;
+    }
+
     void displayMenu() {
         std::cout << "\nMenu options:\n";
         std::cout << "1. Create Account \n";
@@ -37,10 +61,7 @@ namespace AccountView {
         std::cout << "Enter your choice \n";
     }
 
-    int getUserChoice() {
-        int choice;
-        std::cin >> choice;
-
-        return choice;
+    void displayAccountNumber(int accountNumber) {
+        std::cout << "Your Account number is: " << accountNumber << std::endl;
     }
 }
