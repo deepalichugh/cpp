@@ -4,7 +4,7 @@
 #include <string>
 
 namespace AccountView {
-    int getAccountNumberMessage(std::string& message, bool hasError);
+    int promptAccountNumber(std::string& message, bool hasError);
     void printAccountDetails(int accountNumber);
     double getAmount();
     void displayAccountNumber(int accountNumber);

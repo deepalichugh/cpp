@@ -8,7 +8,6 @@ class Bank {
     
     public:
         static int accountNumberCounter;
-        Bank();
         int createAccount(std::string name);
         Account& getAccount(int accountNumber);
 };

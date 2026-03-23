@@ -1,8 +1,6 @@
 #include "Bank.hpp"
 #include <stdexcept>
 
-Bank::Bank() {};
-
 std::unordered_map<int, Account> Bank::accounts;
 
 int Bank::createAccount(std::string name) {

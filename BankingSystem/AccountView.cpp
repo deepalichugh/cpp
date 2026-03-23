@@ -1,7 +1,7 @@
 #include "AccountView.hpp"
 
 namespace AccountView {
-    int getAccountNumberMessage(std::string& message, bool hasError) {
+    int promptAccountNumber(std::string& message, bool hasError) {
         int accountNumber;
         if (hasError) {
             std::cout << "This account number doesn't exist. Try again!\nEnter account number: ";
