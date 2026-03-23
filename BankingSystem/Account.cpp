@@ -1,13 +1,14 @@
 #include "Account.hpp"
+#include "Bank.hpp"
 #include <iostream>
 #include <unordered_map>
 #include <stdexcept>
 
 int Account::accountNumberCounter = 1;
 
-Account::Account() {}
+Account::Account() {};
 
-Account::Account(std::string holderName) {
+Account::Account(std::string& holderName) {
   Account::accountNumber = accountNumberCounter++;
   Account::accountHolderName = holderName;
   Account::balance = 0.0;

@@ -1,15 +1,14 @@
 #include "AccountView.hpp"
 
 namespace AccountView {
-    int getAccountDetails(std::unordered_map<int, Account>& accounts, const std::string& message) {
+    int getAccountNumberMessage(std::string& message, bool hasError) {
         int accountNumber;
-        std::cin >> accountNumber;
-        std::cout << message;
-        
-        while (accounts.find(accountNumber) == accounts.end()) {
-            std::cout << "This account number doesn't exist. Try again!\nEnter account number:";
-            std::cin >> accountNumber;
+        if (hasError) {
+            std::cout << "This account number doesn't exist. Try again!\nEnter account number: ";
+        } else {
+            std::cout << message;
         }
+        std::cin >> accountNumber;
 
         return accountNumber;
     }

@@ -5,7 +5,10 @@
 
 class Bank {
     static std::unordered_map<int, Account> accounts;
-
+    
     public:
-        Account getAccount(int accountNumber) {}
-}
+        static int accountNumberCounter;
+        Bank();
+        int createAccount(std::string name);
+        Account& getAccount(int accountNumber);
+};

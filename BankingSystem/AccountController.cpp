@@ -1,8 +1,23 @@
 #include "AccountView.hpp"
 #include "Bank.hpp"
+#include "Account.hpp"
 
 namespace AccountController {
+    Account& checkAccountExists(std::string message, Bank& bank) {
+        int accountNumber;
+        accountNumber = AccountView::getAccountNumberMessage(message, false);
+
+        while (true) {
+            try {
+                return bank.getAccount(accountNumber);
+            } catch (const std::exception& e) {
+                accountNumber = AccountView::getAccountNumberMessage(message, true);
+            }
+        }
+    }
+
     void run() {
+        Bank bankObj;
         int choice;
 
         while (true) {
@@ -15,9 +30,7 @@ namespace AccountController {
                     std::string name;
                     int accountNumber;
                     name = AccountView::getAccountHolderName();
-                    Account acc(name);
-                    accountNumber = acc.getAccountNumber();
-                    accounts[accountNumber] = acc;
+                    accountNumber = bankObj.createAccount(name);
                     AccountView::displayAccountNumber(accountNumber);
                     break;
                 }
@@ -25,28 +38,26 @@ namespace AccountController {
                 case 2: {
                     int accountNumber;
                     double amount;
-                    accountNumber = AccountView::getAccountDetails(accounts, "Enter your account number: ");
+                    Account& acc = checkAccountExists("Enter your account number: ", bankObj);
                     amount = AccountView::getAmount();
-                    Bank::
-                    accounts.at(accountNumber).deposit(amount);
+                    acc.deposit(amount);
                     break;
                 }
 
                 case 3: {
                     int accountNo;
-                    accountNo = AccountView::getAccountDetails(accounts, "Enter your account number: ");
+                    Account& acc = checkAccountExists("Enter your account number: ", bankObj);
                     double amount;
                     amount = AccountView::getAmount();
-                    accounts.at(accountNo).withdraw(amount);
+                    acc.withdraw(amount);
                     break;
                 }
 
                 case 4: {
-                    int accountNo;
-                    double accBalance;
-                    accountNo = AccountView::getAccountDetails(accounts, "Enter your account number: ");
-                    accBalance = accounts.at(accountNo).getBalance();
-                    AccountView::printAccountBalance(accBalance);
+                    double balance;
+                    Account& acc = checkAccountExists("Enter your account number: ", bankObj);
+                    balance = acc.getBalance();
+                    AccountView::printAccountBalance(balance);
                     break;
                 }
 
@@ -55,16 +66,12 @@ namespace AccountController {
                     int receiverAccountNo;
                     double amount;
 
-                    senderAccountNo = AccountView::getAccountDetails(accounts, "Enter your account number: ");
-                    receiverAccountNo = AccountView::getAccountDetails(accounts, "Enter the account number to transfer to: ");
+                    Account& senderAccount = checkAccountExists("Enter your account number: ", bankObj);
+                    Account& receiverAccount = checkAccountExists("Enter the account number to transfer to: ", bankObj);
 
                     amount = AccountView::getAmount();
-                    if (accounts.at(senderAccountNo).getBalance() < amount) {
-                        AccountView::printError("You do not have sufficient balance to transfer!");
-                        break;
-                    }
-                    accounts.at(senderAccountNo).withdraw(amount);
-                    accounts.at(receiverAccountNo).deposit(amount);
+                    senderAccount.withdraw(amount);
+                    receiverAccount.deposit(amount);
 
                     break;
                 }

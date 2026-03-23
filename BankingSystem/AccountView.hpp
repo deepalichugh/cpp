@@ -4,7 +4,7 @@
 #include <string>
 
 namespace AccountView {
-    int getAccountDetails(std::unordered_map<int, Account>& accounts, const std::string& message);
+    int getAccountNumberMessage(std::string& message, bool hasError);
     void printAccountDetails(int accountNumber);
     double getAmount();
     void displayAccountNumber(int accountNumber);

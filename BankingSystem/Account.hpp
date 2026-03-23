@@ -9,7 +9,7 @@ class Account {
 
   public:
     Account();
-    Account(std::string holderName);
+    Account(std::string& holderName);
 
     int getAccountNumber();
 
