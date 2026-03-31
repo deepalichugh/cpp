@@ -2,15 +2,20 @@
 #include "Account.hpp"
 #include <unordered_map>
 #include <string>
+#include <optional>
 
 namespace AccountView {
-    int promptAccountNumber(std::string& message, bool hasError);
-    void printAccountDetails(int accountNumber);
-    double getAmount();
-    void displayAccountNumber(int accountNumber);
-    void printAccountBalance(double balance);
-    void printError(const std::string& message);
+    void prompt(std::string msg);
+    void prompt(std::string msg, auto val) {
+        std::cout << msg << val;
+    }
+
+    template <typename T>
+    T getInput() {
+        T val;
+        std::cin >> val;
+        return val;
+    }
+
     void displayMenu();
-    int getUserChoice();
-    std::string getAccountHolderName();
 }

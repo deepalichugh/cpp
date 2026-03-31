@@ -1,21 +1,22 @@
 #pragma once
 #include <iostream>
+#include <string>
 
 class Account {
-  int accountNumber;
-  std::string accountHolderName;
-  double balance;
-  static int accountNumberCounter;
+  private:
+    int accountNumber;
+    std::string accountHolderName;
+    double balance;
+    static int accountNumberCounter;
 
   public:
-    Account();
     Account(std::string& holderName);
 
     int getAccountNumber();
 
-    void deposit(double& amount);
+    bool deposit(double& amount);
 
-    void withdraw(double& amount);
+    bool withdraw(double& amount);
 
     double getBalance();
 };

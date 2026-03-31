@@ -1,22 +1,21 @@
 #include "Bank.hpp"
 #include <stdexcept>
 
-std::unordered_map<int, Account> Bank::accounts;
+std::unordered_map<int, Account> Bank::bank;
 
 int Bank::createAccount(std::string name) {
     Account acc(name);
-    int accountNumber;
-    accountNumber = acc.getAccountNumber();
-    Bank::accounts[accountNumber] = acc;
+    int accountNumber = acc.getAccountNumber();
+    Bank::bank.emplace(accountNumber, std::move(acc));
 
     return accountNumber;
 }
 
-Account& Bank::getAccount(int accountNumber) {
-    int account = Bank::accounts.at(accountNumber).getAccountNumber();
-    if (Bank::accounts.find(account) == Bank::accounts.end()) {
-        throw std::runtime_error("This account doesn't exist!");
+Account* Bank::getAccount(int accountNumber) {
+    auto bankAccount = Bank::bank.find(accountNumber);
+    if (bankAccount == Bank::bank.end()) {
+        return nullptr;
     }
 
-    return Bank::accounts.at(accountNumber);
+    return &(bankAccount->second);
 }

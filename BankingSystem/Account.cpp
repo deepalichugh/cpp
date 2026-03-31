@@ -6,28 +6,29 @@
 
 int Account::accountNumberCounter = 1;
 
-Account::Account() {};
-
-Account::Account(std::string& holderName) {
-  Account::accountNumber = accountNumberCounter++;
-  Account::accountHolderName = holderName;
-  Account::balance = 0.0;
-};
+Account::Account(std::string& holderName)
+  : accountNumber(accountNumberCounter++), accountHolderName(holderName), balance(0.0) {};
 
 int Account::getAccountNumber() {
   return accountNumber;
 }
 
-void Account::deposit(double& amount) {
+bool Account::deposit(double& amount) {
+  if (amount < 0) {
+    return false;
+  }
+
   balance += amount;
+  return true;
 }
 
-void Account::withdraw(double& amount) {
-  if (amount > balance) {
-    throw std::runtime_error("You have insufficient balance!");
+bool Account::withdraw(double& amount) {
+  if (amount <= 0 || amount > balance) {
+    return false;
   }
 
   balance -= amount;
+  return true;
 }
 
 double Account::getBalance() {
