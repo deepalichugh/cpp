@@ -5,7 +5,6 @@ namespace AccountView {
         std::cout << msg;
     }
 
-
     void displayMenu() {
         std::cout << "\nMenu options:\n";
         std::cout << "1. Create Account \n";

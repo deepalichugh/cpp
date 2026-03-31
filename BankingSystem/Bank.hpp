@@ -5,7 +5,8 @@
 #include <optional>
 
 class Bank {
-    static std::unordered_map<int, Account> bank;
+    private:
+        static std::unordered_map<int, Account> bank;
     
     public:
         static int accountNumberCounter;

@@ -6,6 +6,7 @@
 class BankController {
     private:
         Bank bank;
+
     public:
         Account* tryGetAccount(std::string message);
         void tryCreateAccount();

@@ -56,7 +56,7 @@ void BankController::tryWithdraw() {
 void BankController::tryTransferFunds() {
     auto* acc1 = tryGetAccount("Enter your account number: ");
     auto* acc2 = tryGetAccount("Enter receiver's account number: ");
-    AccountView::prompt("Enter the amount to withdraw: ");
+    AccountView::prompt("Enter the amount to transfer: ");
     double amount = AccountView::getInput<double>();
     bool isSuccessfulWithdraw = acc1->withdraw(amount);
 
