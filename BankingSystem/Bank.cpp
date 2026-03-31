@@ -1,5 +1,4 @@
 #include "Bank.hpp"
-#include <stdexcept>
 
 std::unordered_map<int, Account> Bank::bank;
 

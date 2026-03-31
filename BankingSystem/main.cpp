@@ -1,9 +1,7 @@
 #include "BankController.hpp"
 #include "AccountView.hpp"
-#include "Bank.hpp"
 
 int main() {
-    Bank bank;
     BankController controller;
     int choice;
 

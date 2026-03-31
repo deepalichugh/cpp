@@ -1,8 +1,4 @@
 #include "Account.hpp"
-#include "Bank.hpp"
-#include <iostream>
-#include <unordered_map>
-#include <stdexcept>
 
 int Account::accountNumberCounter = 1;
 
